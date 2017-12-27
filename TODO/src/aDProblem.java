@@ -5,6 +5,9 @@ public class aDProblem {
 		// TODO Auto-generated method stub
 
 		Scanner lector=new Scanner(System.in);
+		
+		int n=lector.nextInt();
+		
 	}
 
 }
