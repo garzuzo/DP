@@ -7,9 +7,10 @@ public class WeddingShopping {
 
 	static int m;
 
-	static boolean calc[][];
+	
 	static int[][] mem;
 
+	static int[][] matrix;
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -25,13 +26,13 @@ public class WeddingShopping {
 			m = Integer.parseInt(mc[0]);
 			int c = Integer.parseInt(mc[1]);
 
-			calc = new boolean[c][20];
+			
 			mem = new int[c][20];
 
 			for(int[]row:mem)
-			Arrays.fill(row, Integer.MIN_VALUE);
+			Arrays.fill(row, -1);
 			
-			int[][] matrix = new int[c][20];
+			matrix = new int[c][20];
 			for (int j = 0; j < c; j++) {
 
 				String[] kAct = lect.readLine().split(" ");
@@ -47,7 +48,11 @@ public class WeddingShopping {
 
 	}
 
-	static int maxAmount(int[][] matrix, int i, int j, int val) {
-		return 0;
+	static int maxAmount(int money,int g) {
+	
+		if(money<0)
+		return -1000;
+		if(mem[][g]!=-1)
+			return mem[][];
 	}
 }
