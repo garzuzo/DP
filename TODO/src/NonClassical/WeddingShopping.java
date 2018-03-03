@@ -23,23 +23,15 @@ public class WeddingShopping {
 		for (int i = 0; i < n; i++) {
 			mem = new boolean[20][201];
 			String[] mc = lect.readLine().split(" ");
-
 			m = Integer.parseInt(mc[0]);
 			c = Integer.parseInt(mc[1]);
-
-			// for(int[]row:mem)
-			// Arrays.fill(row, -1);
-
 			matrix = new int[c][21];
 			for (int j = 0; j < c; j++) {
-
 				String[] kAct = lect.readLine().split(" ");
-
 				for (int k = 0; k < kAct.length; k++) {
 					int val = Integer.parseInt(kAct[k]);
 					matrix[j][k] = val;
 				}
-
 			}
 			
 			esc.write(maxAmount());
@@ -54,9 +46,9 @@ public class WeddingShopping {
 			if (m - matrix[0][i] >= 0 && matrix[0][i] != 0)
 				mem[0][m - matrix[0][i]] = true;
 		}
-		boolean algunMenor = true;
-		for (int i = 1; i < matrix.length && algunMenor; i++) {
-			algunMenor = false;
+	
+		for (int i = 1; i < matrix.length ; i++) {
+		
 			for (int j = 0; j < 201; j++) {
 
 				if (mem[i - 1][j]) {
@@ -65,7 +57,7 @@ public class WeddingShopping {
 						if (mem[i - 1][j] && j - matrix[i][k] >= 0) {
 
 							mem[i][j - matrix[i][k]] = true;
-							algunMenor = true;
+						
 						}
 					}
 
@@ -74,8 +66,7 @@ public class WeddingShopping {
 
 		}
 
-		boolean finded = false;
-		for (int i = 0; i <= m && !finded && algunMenor; i++) {
+		for (int i = 0; i <= m; i++) {
 
 			if (mem[c - 1][i]) {
 
