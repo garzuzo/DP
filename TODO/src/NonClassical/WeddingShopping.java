@@ -7,10 +7,11 @@ public class WeddingShopping {
 
 	static int m;
 
-	
-	static int[][] mem;
+	static boolean[][] mem;
 
 	static int[][] matrix;
+	static int c;
+
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
 
@@ -18,41 +19,72 @@ public class WeddingShopping {
 		BufferedWriter esc = new BufferedWriter(new OutputStreamWriter(System.out));
 
 		int n = Integer.parseInt(lect.readLine());
-
+		
 		for (int i = 0; i < n; i++) {
-
+			mem = new boolean[20][201];
 			String[] mc = lect.readLine().split(" ");
 
 			m = Integer.parseInt(mc[0]);
-			int c = Integer.parseInt(mc[1]);
+			c = Integer.parseInt(mc[1]);
 
-			
-			mem = new int[c][20];
+			// for(int[]row:mem)
+			// Arrays.fill(row, -1);
 
-			for(int[]row:mem)
-			Arrays.fill(row, -1);
-			
-			matrix = new int[c][20];
+			matrix = new int[c][21];
 			for (int j = 0; j < c; j++) {
 
 				String[] kAct = lect.readLine().split(" ");
 
-				for (int k = 1; k < kAct.length; k++) {
-					matrix[j][k] = Integer.parseInt(kAct[k]);
+				for (int k = 0; k < kAct.length; k++) {
+					int val = Integer.parseInt(kAct[k]);
+					matrix[j][k] = val;
 				}
 
 			}
-
-			esc.write("\n");
+			
+			esc.write(maxAmount());
 		}
+		esc.flush();
 
 	}
 
-	static int maxAmount(int money,int g) {
-	
-		if(money<0)
-		return -1000;
-		if(mem[][g]!=-1)
-			return mem[][];
+	static String maxAmount() {
+
+		for (int i = 1; i < matrix[0].length; i++) {
+			if (m - matrix[0][i] >= 0 && matrix[0][i] != 0)
+				mem[0][m - matrix[0][i]] = true;
+		}
+		boolean algunMenor = true;
+		for (int i = 1; i < matrix.length && algunMenor; i++) {
+			algunMenor = false;
+			for (int j = 0; j < 201; j++) {
+
+				if (mem[i - 1][j]) {
+					for (int k = 1; k <= matrix[i][0]; k++) {
+
+						if (mem[i - 1][j] && j - matrix[i][k] >= 0) {
+
+							mem[i][j - matrix[i][k]] = true;
+							algunMenor = true;
+						}
+					}
+
+				}
+			}
+
+		}
+
+		boolean finded = false;
+		for (int i = 0; i <= m && !finded && algunMenor; i++) {
+
+			if (mem[c - 1][i]) {
+
+				return m - i + "\n";
+
+			}
+
+		}
+		return "no solution\n";
+
 	}
 }
